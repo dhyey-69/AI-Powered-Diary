@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View All Entries - VeriSign Pro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/view_entries.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">AI-Powered Diary: Your Personal Reflection Space</div>
+        <ul class="navbar-links">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            {% if 'user' in session %}
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% else %}
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+            {% endif %}
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+            <li><a href="{{ url_for('contact_us') }}">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <div class="entries-container">
+        <h2>Your Diary Entries</h2>
+
+        <div class="search-container">
+            <form method="GET" action="{{ url_for('view_entries') }}">
+                <label for="search_type">Search By:</label>
+                <select name="search_type" id="search_type" required>
+                    <option value="keyword">Keyword</option>
+                    <option value="date">Date</option>
+                    <option value="mood">Mood</option>
+                </select>
+                <input type="text" name="search_value" placeholder="Enter search value" required>
+                <button type="submit">Search</button>
+                <a href="{{ url_for('view_entries') }}" class="reset-button">Reset</a>
+            </form>
+        </div>
+
+        {% if entries %}
+            {% for entry in entries %}
+                <div class="entry">
+                    <div class="entry-header">
+                        <h3>{{ entry['entry_text'][:50] }}...</h3>
+                        <a href="{{ url_for('edit_entry', entry_id=entry['entry_id']) }}" class="edit-button">Edit</a>
+                        <a href="{{ url_for('delete_entry', entry_id=entry['entry_id']) }}" class="delete-button" onclick="return confirm('Are you sure you want to delete this entry?')">Delete</a>
+                    </div>
+                    <p>{{ entry['entry_text'] }}</p>
+                    <p><strong>Mood:</strong> {{ entry['sentiment'] }}</p>
+                    <p><strong>Date:</strong> {{ entry['created_at'] }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No entries found matching your search criteria.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

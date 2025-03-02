@@ -1,0 +1,94 @@
+/* Navbar Styles (Unchanged from your provided CSS) */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-size: 1.5em;
+    padding-left: 20px;
+}
+
+.navbar-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: right;
+}
+
+.navbar-links li {
+    display: inline;
+    margin-left: 20px;
+}
+
+.navbar-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.navbar-links a:hover {
+    text-decoration: underline;
+}
+
+/* Word Cloud Container */
+.wordcloud-container {
+    max-width: 1000px;
+    margin: 80px auto;
+    text-align: center;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.wordcloud-container h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333333;
+}
+
+/* Word Cloud Image */
+#word-cloud {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Information Section */
+.wordcloud-info {
+    background-color: #f0f0f0;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #555555;
+}
+
+.wordcloud-info h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .wordcloud-container {
+        padding: 15px;
+    }
+
+    .wordcloud-container h2 {
+        font-size: 1.5rem;
+    }
+
+    .wordcloud-info {
+        padding: 12px;
+    }
+}

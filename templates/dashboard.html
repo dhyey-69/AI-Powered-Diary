@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - AI-Powered Diary</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">AI-Powered Diary: Your Personal Reflection Space</div>
+        <ul class="navbar-links">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            {% if 'user' in session %}
+            <li><a href="{{ url_for('logout') }}" onclick="return confirmLogout()">Logout</a></li>
+            {% else %}
+            <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            {% endif %}
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+            <li><a href="{{ url_for('contact_us') }}">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <div class="dashboard-container">
+        <button class="dashboard-button" onclick="goToAddEntry()">Add New Diary Entry</button>
+        <button class="dashboard-button" onclick="goToViewEntries()">View All Entries</button>
+        <button class="dashboard-button" onclick="goToViewAnalytics()">View Analytics</button>
+        <button class="dashboard-button" onclick="goToWordCloud()">Generate Word Cloud</button>
+    </div>
+
+    <script>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    alert("{{ message }}");
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        function goToAddEntry() {
+            window.location.href = "{{ url_for('add_entry') }}";
+        }
+        function goToViewEntries() {
+            window.location.href = "{{ url_for('view_entries') }}";
+        }
+        function goToViewAnalytics() {
+            window.location.href = "{{ url_for('view_analytics') }}";
+        }
+        function goToWordCloud() {
+            window.location.href = "{{ url_for('generate_wordcloud') }}";
+        }
+    </script>
+</body>
+</html>

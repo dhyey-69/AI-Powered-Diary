@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/view_analytics.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">AI-Powered Diary: Your Personal Reflection Space</div>
+        <ul class="navbar-links">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            {% if 'user' in session %}
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% else %}
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+            {% endif %}
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+            <li><a href="{{ url_for('contact_us') }}">Contact Us</a></li>
+        </ul>
+    </nav>
+    
+    <div class="analytics-container">
+        <h2>Sentiment Changes Over Time</h2>
+        
+
+        {% if plot_url %}
+            <img src="data:image/png;base64,{{ plot_url }}" alt="Sentiment Plot">
+        {% else %}
+            <p>No data available for sentiment analysis.</p>
+        {% endif %}
+        
+    </div>
+</body>
+</html>
+

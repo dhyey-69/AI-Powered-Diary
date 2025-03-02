@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Diary Entry - AI-Powered Diary</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/edit_entry.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">AI-Powered Diary: Your Personal Reflection Space</div>
+        <ul class="navbar-links">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            {% if 'user' in session %}
+            <li><a href="{{ url_for('logout') }}" onclick="return confirmLogout()">Logout</a></li>
+            {% else %}
+            <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            {% endif %}
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+            <li><a href="{{ url_for('contact_us') }}">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <div class="entry-form-container">
+        <h2>Edit Diary Entry</h2>
+        <form method="POST" action="{{ url_for('edit_entry', entry_id=entry_id) }}">
+            <label for="entryText">Your Entry</label>
+            <textarea id="entryText" name="entry_text" required>{{ entry['entry_text'] }}</textarea>
+
+            <button type="submit" class="submit-button">Save Changes</button>
+        </form>
+    </div>
+</body>
+</html>

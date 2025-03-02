@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - AI-Powered Diary</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about-us.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">AI-Powered Diary: Your Personal Reflection Space</div>
+        <ul class="navbar-links">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            {% if 'user' in session %}
+            <li><a href="{{ url_for('logout') }}" onclick="return confirmLogout()">Logout</a></li>
+            {% else %}
+            <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            {% endif %}
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+            <li><a href="{{ url_for('contact_us') }}">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <div class="about-container">
+        <h1>About AI-Powered Diary</h1>
+        <div class="about-content">
+            <h2>Who We Are</h2>
+            <p>
+                AI-Powered Diary is a revolutionary digital diary system designed to help you track your moods, sentiments, and life reflections 
+                with the power of artificial intelligence. Our platform uses AI and machine learning algorithms to analyze your diary entries, 
+                providing insights on emotional trends, and helping you reflect on your personal growth.
+            </p>
+
+            <h2>Our Mission</h2>
+            <p>
+                Our mission is to provide a personal, intelligent, and secure space where users can record their thoughts, track their emotions, 
+                and receive personalized feedback. By combining advanced AI technology with daily journaling, we aim to empower individuals in 
+                their journey toward self-awareness and emotional well-being.
+            </p>
+
+            <h2>Our Vision</h2>
+            <p>
+                We envision a future where AI-powered tools support mental health and personal growth. Our platform will expand to integrate 
+                additional features like mood tracking, journaling prompts, and self-improvement recommendations to make personal reflection 
+                easier, more insightful, and beneficial to everyone.
+            </p>
+
+            <h2>Why Choose AI-Powered Diary?</h2>
+            <p>
+                With our AI-powered analysis, users can gain a deeper understanding of their emotional states over time. The platform offers 
+                powerful text analysis tools like sentiment analysis and mood trend visualization, all designed to enhance your journaling experience.
+                Our user-friendly interface ensures that writing, exploring, and reflecting are as easy as possible.
+            </p>
+
+            <h2>Our Technology</h2>
+            <p>
+                AI-Powered Diary uses state-of-the-art natural language processing (NLP) models to perform sentiment analysis and mood tracking 
+                on your diary entries. These algorithms analyze the language, tone, and context of your writings, enabling personalized insights. 
+                We also use visualizations like word clouds and mood graphs to present your emotional trends in an easy-to-understand format, 
+                helping you reflect and grow.
+            </p>
+        </div>
+    </div>
+    <script>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    alert("{{ message }}");
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </script>
+</body>
+</html>
